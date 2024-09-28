@@ -35,3 +35,23 @@ shirtDesign.addEventListener('change', (e) => {
         }
     }
 });
+
+const registerForActivities = document.getElementById("activities");
+let pDollars = document.getElementById("activities-cost");
+let totalCost = 0;
+
+registerForActivities.addEventListener('change', (e) => {
+    const dataCost = e.target.getAttribute("data-cost");
+    const costNumber = +dataCost;
+    
+    if(e.target.checked === true) {
+        totalCost += costNumber;
+        pDollars.innerHTML = `<p>Total: $${totalCost}<p>`;
+    }
+    if (e.target.checked === false){
+        totalCost -= costNumber;
+        pDollars.innerHTML = `<p>Total: $${totalCost}<p>`;
+    }
+});
+
+
