@@ -1,6 +1,8 @@
+//Add focus to the name field upon refresh
 const nameField = document.getElementById("name");
 nameField.focus();
 
+//Hides other job role option unless other is selected
 const jobRole = document.getElementById("title");
 const otherJobRole = document.getElementById("other-job-role");
 
@@ -13,6 +15,8 @@ jobRole.addEventListener('change', (e) => {
     }
 });
 
+//Disables shirt color menu until design is chosen
+//Narrows colors available based on design selected
 const shirtDesign = document.getElementById("design");
 const shirtColorSelect = document.getElementById("color");
 const colorOptions = shirtColorSelect.children;
@@ -36,6 +40,7 @@ shirtDesign.addEventListener('change', (e) => {
     }
 });
 
+//Adds cost of activites to total cost when they're checked
 const registerForActivities = document.getElementById("activities");
 let pDollars = document.getElementById("activities-cost");
 let totalCost = 0;
@@ -54,4 +59,30 @@ registerForActivities.addEventListener('change', (e) => {
     }
 });
 
+//Hides all payment options except credit card unless a different option is selected in the dropdown
+const paymentSelection = document.getElementById("payment");
+const creditCard = document.getElementById("credit-card");
+const paypal = document.getElementById("paypal");
+const bitcoin = document.getElementById("bitcoin");
 
+paypal.style.display = "none"; 
+bitcoin.style.display = "none"; 
+paymentSelection.children[1].setAttribute("selected", "");
+
+paymentSelection.addEventListener('change', (e) => {
+    if (e.target.value === "credit-card") {
+        creditCard.style.display = ""; 
+        paypal.style.display = "none"; 
+        bitcoin.style.display = "none"; 
+    }
+    if (e.target.value === "paypal") {
+        creditCard.style.display = "none"; 
+        paypal.style.display = ""; 
+        bitcoin.style.display = "none"; 
+    }
+    if (e.target.value === "bitcoin") {
+        creditCard.style.display = "none"; 
+        paypal.style.display = "none"; 
+        bitcoin.style.display = ""; 
+    }
+});
