@@ -96,51 +96,49 @@ const zipCodeInput = document.getElementById("zip");
 const cvvFieldInput = document.getElementById("cvv");
 const form = document.querySelector('form');
 
-function testValidName() {
+function testValidName(e) {
     const testName = /^(.|\s)*\S(.|\s)*$/.test(nameField.value);
     if (testName === false) {
-        return false;
+        e.preventDefault();
     }
 }
 
-function testValidEmail() {
+function testValidEmail(e) {
     const testEmail = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddressField.value);  //credit to Treehouse Unit 3: Regular Expressions in JavaScript course
     if (testEmail === false) {
-        return false;
+        e.preventDefault();
     }
 }
 
-function testValidActivities() {
+function testValidActivities(e) {
+    let checkedBoxes = 0;
     for (let i = 0; i < activityCheckboxes.length; i++) {
-        if((activityCheckboxes.checked).length === 0) {
-            return false;     
+        if(activityCheckboxes[i].checked) checkedBoxes +=1};
+        
+        if(checkedBoxes === 0) {
+            e.preventDefault();    
         }
     }
-}
 
-// function testValidCard(cardnumber) {
-//  //card number field must have 13-16 digits, no spaces or dashes
-//     const userCreditCard = cardNumberInput.value;
-//     const testCard = /^\d{13,16}$/.test(userCreditCard);
-//  //zipcode field must have 5-digit number
-
-//  //cvv field must have a 3-digit number
-
-//  //return false if one of those not met
-//     if(testCard === false) {
-//         return false;
-//     }
-// };
+function testValidCard(e) {
+    const testCard = /^\d{13,16}$/.test(cardNumberInput.value);
+    const testZip = /^\d{5}$/.test(zipCodeInput.value);
+    const testCVV = /^\d{3}$/.test(cvvFieldInput.value);
+    
+    if(testCard === false || testZip === false || testCVV === false) {
+        e.preventDefault();
+    } 
+};
 
 form.addEventListener('submit', (e) => {
-    testValidName();
-    testValidEmail();
-    testValidActivities();
-
-    if (testValidName() === false || testValidEmail() === false || testValidActivities() === false ) {
-        e.preventDefault(); 
-    }
-    // if (testValidCard() === false) {
-    //     e.preventDefault(); 
-    // }
+    testValidName(e);
+    testValidEmail(e);
+    testValidActivities(e);
+    
+    if(paymentSelection.value !== "bitcoin" && paymentSelection.value !== "paypal"){
+        testValidCard(e);
+    }   
 });
+
+
+//   
