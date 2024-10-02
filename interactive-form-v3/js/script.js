@@ -46,7 +46,7 @@ shirtDesign.addEventListener('change', (e) => {
 
     for (let i  = 0; i < colorOptions.length; i++) {
         const value = e.target.value;
-        const optionTheme = colorOptions[i].getAttribute("data-theme");
+        let optionTheme = colorOptions[i].getAttribute("data-theme");
 
         if (optionTheme === value) {
             colorOptions[i].hidden = false;
