@@ -43,7 +43,8 @@ shirtColorSelect.disabled = true;
 
 shirtDesign.addEventListener('change', (e) => {
     shirtColorSelect.disabled = false; 
-
+    shirtColorSelect.selectedIndex = 0;
+    
     for (let i  = 0; i < colorOptions.length; i++) {
         const value = e.target.value;
         let optionTheme = colorOptions[i].getAttribute("data-theme");
